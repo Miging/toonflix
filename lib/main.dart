@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:toonflix/widgets/button.dart';
-import 'package:toonflix/widgets/currency_card.dart';
 
 void main() {
   runApp(const App());
@@ -73,21 +71,6 @@ class App extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Button(
-                      text: 'Transfer',
-                      bgColor: Color(0xFFF1B33B),
-                      textColor: Colors.black,
-                    ),
-                    Button(
-                      text: 'Request',
-                      bgColor: Color(0xFF1F2123),
-                      textColor: Colors.white,
-                    ),
-                  ],
-                ),
                 const SizedBox(
                   height: 100,
                 ),
@@ -114,32 +97,12 @@ class App extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const CurrencyCard(
-                  name: 'Euro',
-                  code: 'EUR',
-                  amount: '6 428',
-                  icon: Icons.euro_rounded,
-                  isInverted: false,
-                ),
+                
                 Transform.translate(
                   offset: const Offset(0, -20),
-                  child: const CurrencyCard(
-                    name: 'Bitcoin',
-                    code: 'BTC',
-                    amount: '9 785',
-                    icon: Icons.currency_bitcoin,
-                    isInverted: true,
-                  ),
                 ),
                 Transform.translate(
                   offset: const Offset(0, -40),
-                  child: const CurrencyCard(
-                    name: 'Dollar',
-                    code: 'USD',
-                    amount: '243',
-                    icon: Icons.attach_money_rounded,
-                    isInverted: false,
-                  ),
                 ),
               ],
             ),
