@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toonflix/screens/home_screen.dart';
 import 'package:toonflix/widgets/button.dart';
 import 'package:toonflix/widgets/currency_card.dart';
 
@@ -6,48 +7,118 @@ void main() {
   runApp(const App());
 }
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({super.key});
-
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  List<int> numbers = [];
-  void onClicked() {
-    //setState->build재실행.
-    setState(() {
-      numbers.add(numbers.length);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: const Color(0xFFF4EDDB),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Click Count',
-                style: TextStyle(fontSize: 30),
-              ),
-              for (var n in numbers) Text('$n'),
-              IconButton(
-                iconSize: 40,
-                onPressed: onClicked,
-                icon: const Icon(Icons.add_box_rounded),
-              ),
-            ],
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            color: Color(0xFF232B55),
           ),
         ),
+        cardColor: const Color(0xFFF4EDDB),
+        colorScheme: ColorScheme.fromSwatch(
+          backgroundColor: const Color(0xFFE7626C),
+        ),
       ),
+      home: const HomeScreen(),
     );
   }
 }
+
+//Life Cycle
+// class App extends StatefulWidget {
+//   const App({super.key});
+
+//   @override
+//   State<App> createState() => _AppState();
+// }
+
+// class _AppState extends State<App> {
+//   // List<int> numbers = [];
+//   // void onClicked() {
+//   //setState->build재실행.
+//   // setState(() {
+//   //   numbers.add(numbers.length);
+//   // });
+//   // }
+//   bool showTitle = true;
+
+//   void toggleTitle() {
+//     setState(() {
+//       showTitle = !showTitle;
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       theme: ThemeData(
+//         textTheme: const TextTheme(
+//           titleLarge: TextStyle(
+//             color: Colors.red,
+//           ),
+//         ),
+//       ),
+//       home: Scaffold(
+//         backgroundColor: const Color(0xFFF4EDDB),
+//         body: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               showTitle ? const MyLargeTitle() : const Text('nothing'),
+//               IconButton(
+//                   onPressed: toggleTitle,
+//                   icon: const Icon(Icons.remove_red_eye)),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class MyLargeTitle extends StatefulWidget {
+//   const MyLargeTitle({
+//     super.key,
+//   });
+
+//   @override
+//   State<MyLargeTitle> createState() => _MyLargeTitleState();
+// }
+
+// class _MyLargeTitleState extends State<MyLargeTitle> {
+//   //상태 초기화. 주 context에서 상태 가져오건,API상태 업데이트 등.
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     print('Helloe');
+//   }
+
+//   //API 업데이트,이벤트 리스너 구독 취소, form리스너 벗어나기
+//   @override
+//   void dispose() {
+//     // TODO: implement dispose
+//     super.dispose();
+//     print('dispose');
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     print('fjsdlkj');
+//     return Text(
+//       'My Large Title',
+//       style: TextStyle(
+//         fontSize: 30,
+//         color: Theme.of(context).textTheme.titleLarge?.color,
+//       ),
+//     );
+//   }
+// }
 // class App extends StatelessWidget {
 //   const App({super.key});
 
