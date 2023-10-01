@@ -1,9 +1,29 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:toonflix/models/webtoon_model.dart';
+import 'package:toonflix/services/api_service.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final Future<List<WebtoonMedel>> webtoons = ApiService.getTodaysToons();
+
+  ////stateful 일경우 처
+  // List<WebtoonMedel> webtoons = [];
+  // bool isLoading = true;
+  // void waitForWebToons() async {
+  //   webtoons = await ApiService.getTodaysToons();
+  //   isLoading = false;
+  //   setState(() {});
+  // }
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   waitForWebToons();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +40,44 @@ class HomeScreen extends StatelessWidget {
         foregroundColor: Colors.green,
       ),
       backgroundColor: Colors.white,
+      body: FutureBuilder(
+        future: webtoons,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Column(
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Expanded(child: makeList(snapshot)),
+              ],
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
+    );
+  }
+
+  ListView makeList(AsyncSnapshot<List<WebtoonMedel>> snapshot) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: snapshot.data!.length,
+      itemBuilder: (context, index) {
+        print(index);
+        var webtoon = snapshot.data![index];
+        return Column(
+          children: [Image.network(webtoon.thumb), Text(webtoon.title)],
+        );
+      },
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 40,
+      ),
     );
   }
 }
-
-
 
 //타이머예제
 // class HomeScreen extends StatefulWidget {
